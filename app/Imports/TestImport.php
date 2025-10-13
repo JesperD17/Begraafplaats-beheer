@@ -4,19 +4,21 @@ namespace App\Imports;
 
 use App\Models\Test;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class TestImport implements ToModel
+class TestImport implements ToModel, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
     public function model(array $row)
     {
+        // dd($row);
         return new Test([
-            'test' => $row[0],
-            'data' => $row[1],
+            'test' => $row["test"],
+            'data' => $row["data"],
         ]);
+    }
+
+    public function headingRow()
+    {
+        return 1;
     }
 }
