@@ -9,60 +9,22 @@
     import { useForm } from '@inertiajs/svelte';
     import { LoaderCircle, Lock, Mail } from 'lucide-svelte';
 
-    import { Recaptcha, recaptcha, observer } from "svelte-recaptcha-v2";
-
-    let { status, canResetPassword } = $props();
-    let isMobile = window.innerWidth < 700;
-    
     const form = useForm({
         email: '',
         password: '',
         remember: false,
     });
 
-    let recaptchaRef;
-    let recaptchaToken = null;
-    const googleRecaptchaSiteKey = "6LdgguIrAAAAAMf9PqSpqhHh48Rea9EWthpmlE1I";
+    let { status, canResetPassword } = $props();
 
-    function onCaptchaReady() {
-        console.log("reCAPTCHA is ready");
-    }
-
-    function onCaptchaSuccess(event) {
-        recaptchaToken = event.detail;
-        console.log("Token:", recaptchaToken);
-    }
-
-    function onCaptchaError() {
-        console.error("reCAPTCHA error");
-    }
-
-    function onCaptchaExpire() {
-        recaptchaToken = null;
-        console.warn("reCAPTCHA expired");
-    }
-
-    function submit(e) {
+    const submit = (e) => {
         e.preventDefault();
-
-        if (!recaptchaToken) {
-            console.warn("Please complete the reCAPTCHA first");
-            return;
-        }
-        console.log("Submitting form with token:", recaptchaToken);
-        if (!recaptchaToken) return;
-    
         $form.post(route('login'), {
-            data: {
-                ...$form.data(),
-                'g-recaptcha-response': recaptchaToken,
-            },
-            onFinish: () => {
-                $form.reset('password');
-                recaptchaToken = null;
-            },
+            onFinish: () => $form.reset('password'),
         });
-    }
+    };
+
+    let isMobile = window.innerWidth < 700;
 </script>
 
 <svelte:head>
@@ -124,15 +86,12 @@
                     <InputError message={$form.errors.password} />
                 </div>
 
-                <Recaptcha
-                    bind:this={recaptchaRef}
-                    sitekey={googleRecaptchaSiteKey}
-                    size="normal"
-                    on:success={onCaptchaSuccess}
-                    on:error={onCaptchaError}
-                    on:expired={onCaptchaExpire}
-                    on:ready={onCaptchaReady}
-                />
+                <!-- <div>
+                    <Label for="remember">
+                        <Checkbox id="remember" bind:checked={$form.remember} tabindex={3} class="baseText" />
+                        <span>Onthoud mij</span>
+                    </Label>
+                </div> -->
 
                 <div class="emptyGap-{isMobile ? 's' : 'm'} center-flex padding-btm">
                     {#if $form.processing}
