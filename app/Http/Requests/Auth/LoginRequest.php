@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Http;
 
 class LoginRequest extends FormRequest
 {
@@ -29,6 +30,14 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'g-recaptcha-response' => ['required', 'string'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'g-recaptcha-response.required' => 'Please complete the reCAPTCHA.',
         ];
     }
 
@@ -39,17 +48,31 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        $this->ensureIsNotRateLimited();
+        $secret = config('services.recaptcha.secret');
+        $token = $this->input('g-recaptcha-response');
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+        $verification = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => $secret,
+            'response' => $token,
+            'remoteip' => $this->ip(),
+        ]);
 
+        $json = $verification->json();
+
+        if (!($json['success'] ?? false)) {
+            throw ValidationException::withMessages([
+                'g-recaptcha-response' => 'reCAPTCHA verification failed.',
+            ]);
+        }
+
+        // Proceed with normal credential authentication
+        $credentials = $this->only('email', 'password');
+
+        if (! Auth::guard()->attempt($credentials, $this->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
         }
-
-        RateLimiter::clear($this->throttleKey());
     }
 
     /**
