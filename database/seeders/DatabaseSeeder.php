@@ -38,8 +38,8 @@ class DatabaseSeeder extends Seeder
 
         // Standard roles
         // example
-        Permissions::create(['perm name' => 'r']);
-        Permissions::create(['perm name' => 'r, w, d']);
+        Permissions::create(['name' => 'read']);
+        Permissions::create(['name' => 'read, write, destroy']);
 
         // Test users - remove in production
         User::factory()->create([
@@ -49,9 +49,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
+            'name' => 'editor User',
+            'email' => 'editor@example.com',
+            'role_id' => 2,
+        ]);
+
+        User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
             'role_id' => 3,
+        ]);
+
+        User::factory()->create([
+            'name' => 'Super Admin User',
+            'email' => 'admin2@example.com',
+            'role_id' => 4,
         ]);
     }
 }

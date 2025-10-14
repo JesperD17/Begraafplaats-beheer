@@ -7,7 +7,7 @@ use App\Http\Middleware\EnsureAdminRole;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
-})->name('home');
+})->middleware(['auth'])->name('home');
 
 // Pages
 Route::get('dashboard', function () {

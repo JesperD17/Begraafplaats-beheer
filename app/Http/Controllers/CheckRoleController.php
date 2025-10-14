@@ -10,13 +10,13 @@ class CheckRoleController extends Controller
 {
     public function index(Request $request)
     {
-        if (Auth::check()) {
-            $roleID = $request->user()->role_id;
-
-            $roles = DB::table('roles')->get();
-
-            return response()->json($roles);
+        if (!$request->ajax() && !$request->expectsJson()) {
+            return redirect('/');
         }
-        return null;
+
+        $userRoleID = $request->user()->role_id;
+        $userRoleData = DB::table('roles')->where('id', $userRoleID)->first();
+
+        return response()->json(['role_name' => $userRoleData->name]);
     }
 }
