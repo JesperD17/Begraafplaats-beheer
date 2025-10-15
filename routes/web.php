@@ -10,7 +10,10 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->middleware(['auth'])->name('home');
 
-// Pages
+Route::get('/overview', function () {
+    return Inertia::render('Overview');
+})->middleware(['auth'])->name('overview');
+
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
