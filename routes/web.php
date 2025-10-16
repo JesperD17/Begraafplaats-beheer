@@ -10,9 +10,13 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->middleware(['auth'])->name('home');
 
-Route::get('/overview', function () {
-    return Inertia::render('Overview');
-})->middleware(['auth'])->name('overview');
+Route::get('/cemeteries', function () {
+    return Inertia::render('Cemeteries');
+})->middleware(['auth'])->name('cemeteries');
+
+Route::get('/cemeteries/overview/{name}', function ($name) {
+    return Inertia::render('Overview', ['name' => $name]);
+})->middleware(['auth'])->name('cemetery.overview');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

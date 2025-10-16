@@ -1,4 +1,5 @@
 <script lang="js">
+    export let name;
     
 </script>
 
@@ -6,6 +7,6 @@
     Overzicht
 </svelte:head>
 
-<div>
-    Overzicht
+<div class="section">
+    overzicht pagina voor {name}
 </div>
