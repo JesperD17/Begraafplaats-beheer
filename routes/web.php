@@ -8,7 +8,7 @@ use App\Http\Middleware\EnsureAdminRole;
 
 Route::get('/', function () {
     return Inertia::render('Home');
-})->middleware(['auth'])->name('home');
+})->name('home');
 
 Route::get('/cemeteries', function () {
     return Inertia::render('Cemeteries');
