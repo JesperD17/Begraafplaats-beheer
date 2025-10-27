@@ -186,6 +186,10 @@ html, body {
     height: -webkit-fill-available;
 }
 
+.section {
+    margin: 40px 0px;
+}
+
 /* fonts */
 .h1 {
     font-size: 28px;
@@ -195,13 +199,31 @@ html, body {
     font-size: 15px;
 }
 
+.bold {
+    font-weight: 600;
+}
+
 /* padding, margin, radius etc */
 .padding-all {
     padding: var(--margin-padding);
 }
 
+.pading-noTop {
+    padding: var(--margin-padding);
+    padding-top: unset;
+}
+
 .padding-btm {
     padding-bottom: var(--margin-padding);
+}
+
+.margin-noTop {
+    margin: var(--margin-padding);
+    margin-top: unset;
+}
+
+.margin-all {
+    margin: var(--margin-padding);
 }
 
 .margin-btm {
@@ -220,6 +242,11 @@ html, body {
 .border-radius-l {
     border-top-left-radius: var(--border-radius);
     border-bottom-left-radius: var(--border-radius);
+}
+
+.border-radius-t {
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
 }
 
 .col-flex {
@@ -243,12 +270,20 @@ html, body {
     align-items: center;
 }
 
+.center-text {
+    text-align: center;
+}
+
 .justify-between {
     justify-content: space-between;
 }
 
 .justify-end {
     justify-content: end;
+}
+
+.wrap {
+    flex-wrap: wrap;
 }
 
 .flex-s-gap {
@@ -258,6 +293,11 @@ html, body {
 
 .relative {
     position: relative;
+}
+
+.flex-m-gap {
+    display: flex;
+    gap: 8px;
 }
 
 .gap {
@@ -307,23 +347,47 @@ html, body {
     background: #ededed;
 }
 
+/* blocks */
+.overlay-w-h {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+/* location cards */
+.card-loc {
+    max-width: 300px;
+    width: -webkit-fill-available;
+}
+
 /* input fields */
 input.base {
     padding: var(--padding-fields);
 }
 
 /* btns */
-button.base {
+button.base, a.base {
     padding: var(--padding-fields);
     border-radius: var(--border-radius);
     transition: all 0.2s;
+    border: solid 2px black;
+    text-align: center;
+    text-decoration: none;
 }
 
-button.base:hover {
+button.base:hover, a.base:hover {
     cursor: pointer;
 }
 
-button.primary:hover {
+button.primary:hover, a.primary:hover {
     background: #dcd9d9;
 }
 
