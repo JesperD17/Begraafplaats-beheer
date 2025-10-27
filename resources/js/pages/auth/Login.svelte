@@ -28,7 +28,7 @@
 </script>
 
 <svelte:head>
-    <title>Login</title>
+    <title>Inloggen</title>
 </svelte:head>
 
 {#if status}

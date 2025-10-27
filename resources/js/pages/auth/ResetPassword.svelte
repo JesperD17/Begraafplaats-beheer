@@ -32,7 +32,7 @@
 </script>
 
 <svelte:head>
-    <title>Reset Password</title>
+    <title>Wachtwoord resetten</title>
 </svelte:head>
 
 <form onsubmit={submit}>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="grid gap-2">
-            <Label for="password">Password</Label>
+            <Label for="password">Wachtwoord</Label>
             <Input
                 id="password"
                 type="password"
@@ -53,13 +53,13 @@
                 bind:value={$form.password}
                 class="mt-1 block w-full"
                 autofocus
-                placeholder="Password"
+                placeholder="Wachtwoord"
             />
             <InputError message={$form.errors.password} />
         </div>
 
         <div class="grid gap-2">
-            <Label for="password_confirmation">Confirm Password</Label>
+            <Label for="password_confirmation">Bevestig Wachtwoord</Label>
             <Input
                 id="password_confirmation"
                 type="password"
@@ -67,7 +67,7 @@
                 autocomplete="new-password"
                 bind:value={$form.password_confirmation}
                 class="mt-1 block w-full"
-                placeholder="Confirm password"
+                placeholder="Bevestig wachtwoord"
             />
             <InputError message={$form.errors.password_confirmation} />
         </div>
@@ -76,7 +76,7 @@
             {#if $form.processing}
                 <LoaderCircle class="spinner" />
             {/if}
-            Reset password
+            Wachtwoord resetten
         </Button>
     </div>
 </form>

@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-    <title>Confirm Password</title>
+    <title>Wachtwoord bevestigen</title>
 </svelte:head>
 
 <div class="form-alignment">

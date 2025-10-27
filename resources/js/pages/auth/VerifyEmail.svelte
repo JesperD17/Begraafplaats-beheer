@@ -19,12 +19,12 @@
 </script>
 
 <svelte:head>
-    <title>Verify Email</title>
+    <title>Verificatie E-mail</title>
 </svelte:head>
 
 {#if status === 'verification-link-sent'}
     <div class="mb-4 text-center text-sm font-medium text-green-600">
-        A new verification link has been sent to the email address you provided during registration.
+        Een nieuwe verificatielink is naar uw e-mailadres verzonden.
     </div>
 {/if}
 
@@ -33,8 +33,8 @@
         {#if $form.processing}
             <LoaderCircle class="spinner" />
         {/if}
-        Resend verification email
+        Opnieuw verificatie e-mail verzenden
     </Button>
 
-    <TextLink href={route('logout')} method="post" as="button" class="mx-auto block text-sm">Log out</TextLink>
+    <TextLink href={route('logout')} method="post" as="button" class="mx-auto block text-sm">Uitloggen</TextLink>
 </form>

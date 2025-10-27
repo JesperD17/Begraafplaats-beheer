@@ -27,7 +27,7 @@
 </script>
 
 <svelte:head>
-    <title>Forgot Password</title>
+    <title>Wachtwoord vergeten</title>
 </svelte:head>
 
 {#if status}
