@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('grave_agreements', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("rights_holder_id");
-            $table->foreign("rights_holder_id")->references("id")->on("rights_holders")->onDelete("cascade");
             $table->unsignedBigInteger("grave_id");
-            $table->foreign("grave_id")->references("id")->on("graves")->onDelete("cascade");
             $table->string("start_date");
             $table->string("end_date");
             $table->timestamps();
