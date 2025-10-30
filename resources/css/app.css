@@ -383,7 +383,7 @@ input.base {
 }
 
 /* btns */
-button.base, a.base {
+button.base, a.base, .btn {
     padding: var(--padding-fields);
     border-radius: var(--border-radius);
     transition: all 0.2s;
@@ -392,11 +392,11 @@ button.base, a.base {
     text-decoration: none;
 }
 
-button.base:hover, a.base:hover {
+button.base:hover, a.base:hover, .btn:hover {
     cursor: pointer;
 }
 
-button.primary:hover, a.primary:hover {
+button.primary:hover, a.primary:hover, .btn.primary:hover {
     background: #dcd9d9;
 }
 

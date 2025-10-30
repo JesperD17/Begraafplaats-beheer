@@ -21,7 +21,6 @@
 
     const submit = (e: Event) => {
         e.preventDefault();
-        console.log($form.file, 'test');
         $form.post(route('import'), {
             forceFormData: true,
         });

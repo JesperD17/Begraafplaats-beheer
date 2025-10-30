@@ -6,15 +6,15 @@
     }
 
     let { user: propUser }: Props = $props();
-    const derivedUser = $derived($page.props.auth.user);
-    const userRole = $derived($page.props.auth.user.role.name);
+    const derivedUser = $derived($page?.props?.auth?.user || null);
+    const userRole = $derived($page?.props?.auth?.user?.role?.name || null);
 </script>
 
 <div class="padding-all row-flex align-center justify-between border-primary-btm bg-primary">
     <div>
         <div class="h2">DNBP</div>
     </div>
-    <div class="flex-m-gap">
+    <div class="flex-m-gap align-center">
         <Link href={route('home')}>
             Home
         </Link>
@@ -23,11 +23,14 @@
                 begraafplaatsen
             </Link>
             {#if (userRole === 'admin')}
+                <Link href={route('import')}>
+                    Excel import
+                </Link>
                 <Link href={route('admin')}>
                     Admin
                 </Link>
             {/if}
-            <Link href={route('logout')} method="post" as="button">
+            <Link class="btn primary" href={route('logout')} method="post" as="button">
                 Log out
             </Link>
         {:else}
