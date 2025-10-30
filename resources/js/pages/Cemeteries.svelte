@@ -36,11 +36,8 @@
                 credentials: 'include',
             });
             const data = await response.json();
-
-            console.log("Locations:", data);
             cards = data;
         } catch (error) {
-            console.error('Error fetching locations:', error);
             cards = "error";
         }
     }
@@ -79,7 +76,6 @@
 
         <div class="section">
             {#if cards.length > 0 && location !== "laden..."}
-            {console.log(cards)}
             <div class="flex-m-gap wrap">
                     {#each cards as card}
                         <div class="col-flex card-loc border-radius justify-between border-primary">
