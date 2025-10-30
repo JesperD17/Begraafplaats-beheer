@@ -1,7 +1,5 @@
 <script lang="ts">
     import { Link, page } from '@inertiajs/svelte';
-    import getUserRole from '@/lib/getUserRole';
-    import { onMount } from 'svelte';
 
     interface Props {
         user?: any;
@@ -9,13 +7,7 @@
 
     let { user: propUser }: Props = $props();
     const derivedUser = $derived($page.props.auth.user);
-    let userRole = $state<string | null>();
-
-    onMount(async () => {
-        userRole = await getUserRole()
-        console.log(userRole);
-    });
-    
+    const userRole = $derived($page.props.auth.user.role.name);
 </script>
 
 <div class="padding-all row-flex align-center justify-between border-primary-btm bg-primary">
