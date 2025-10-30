@@ -1,8 +1,7 @@
 <script>
   import AppLayout from "@/layouts/AppLayout.svelte";
-
-  export let page = "Admin Overzicht";
   import { onMount } from "svelte";
+  import { page } from "@inertiajs/svelte";
 
   let searchTerm = "";
   let grafData = [];
@@ -16,14 +15,23 @@
 
   onMount(async () => {
     try {
-      const res = await fetch("/users", { credentials: "include" }); // send session cookies
+      const res = await fetch("/getRightsHolders", {
+        headers: {
+            Accept: 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        credentials: 'include',
+      });
+      
       if (!res.ok) throw new Error("Kan gebruikers niet laden");
-
+      
       const data = await res.json();
       grafData = data.map(user => ({
         id: user.id,
-        naam: user.name,
-        locatie: ""
+        naam: user.first_name,
+        // tussenvoegsel: user.infix,
+        // achternaam: user.last_name,
+        locatie: user.city,
       }));
     } catch (err) {
       console.error(err);
@@ -32,8 +40,8 @@
   });
 
   // Dynamically filter users
-  $: filteredGrafData = grafData.filter(plaats =>
-    plaats.naam.toLowerCase().includes(searchTerm.toLowerCase())
+  $:  filteredGrafData = grafData.filter(plaats =>
+    (plaats.naam || "").toLowerCase().includes((searchTerm || "").toLowerCase())
   );
 
   function openModal(plaats) {
@@ -62,12 +70,16 @@
 
   async function deleteGraf() {
     try {
-      const res = await fetch(`/users/${deleteId}`, {
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      console.log(csrfToken)
+      const res = await fetch(`/delRightsHolder/${deleteId}`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json"
+          Accept: 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-Token': csrfToken
         },
-        credentials: "include" // session-based authentication
+        credentials: 'include',
       });
 
       if (res.ok) {
@@ -86,7 +98,7 @@
 
 
 <AppLayout class="container">
-  <h1>{page}</h1>
+  <h1>Admin overzicht</h1>
 
   <div class="search-container">
     <input type="text" bind:value={searchTerm} placeholder="Zoeken op naam..." />

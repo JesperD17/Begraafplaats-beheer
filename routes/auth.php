@@ -12,12 +12,7 @@ use App\Http\Controllers\GetCemeteries;
 use App\Http\Controllers\GetCityName;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
-
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::delete('/users/{id}', [AdminController::class, 'destroy']);
-});
-
+use App\Http\Controllers\GetRightsHolders;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -61,9 +56,13 @@ Route::middleware('auth')->group(function () {
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('logout');
+    ->name('logout');
 
     Route::get('/getCityName', [GetCityName::class, 'index']);
 
     Route::get('/getCemeteries', [GetCemeteries::class, 'index']);
+    
+    Route::delete('/delRightsHolder/{id}', [AdminController::class, 'destroy']);
+
+    Route::get('getRightsHolders', [GetRightsHolders::class, 'index']);
 });

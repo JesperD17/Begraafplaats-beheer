@@ -6,6 +6,7 @@ use App\Models\Roles;
 use App\Models\User;
 use App\Models\Permissions;
 use App\Models\Cemeteries;
+use App\Models\RightsHolders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -136,6 +137,31 @@ class DatabaseSeeder extends Seeder
             'municipality' => 'Kampen',
             'latitude' => '52.4510279',
             'longitude' => '5.908569',
+        ]);
+
+        // Rights Holders
+        RightsHolders::create([
+            'first_name' => 'Jan',
+            'infix' => 'de',
+            'last_name' => 'Vries',
+            'address' => 'Dorpsstraat 1',
+            'city' => 'Zwolle',
+        ]);
+
+        RightsHolders::create([
+            'first_name' => 'Piet',
+            'infix' => 'van',
+            'last_name' => 'Dijk',
+            'address' => 'Kerklaan 5',
+            'city' => 'Kampen',
+        ]);
+
+        RightsHolders::create([
+            'first_name' => 'Klaas',
+            'infix' => '',
+            'last_name' => 'Jansen',
+            'address' => 'Schoolstraat 10',
+            'city' => 'Zwolle',
         ]);
     }
 }
