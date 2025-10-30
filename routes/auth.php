@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\GetCementeries;
+use App\Http\Controllers\GetCemeteries;
 use App\Http\Controllers\GetCityName;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
