@@ -14,7 +14,7 @@
     <div>
         <div class="h2">DNBP</div>
     </div>
-    <div class="flex-m-gap">
+    <div class="flex-m-gap align-center">
         <Link href={route('home')}>
             Home
         </Link>
@@ -30,7 +30,7 @@
                     Admin
                 </Link>
             {/if}
-            <Link href={route('logout')} method="post" as="button">
+            <Link class="btn primary" href={route('logout')} method="post" as="button">
                 Log out
             </Link>
         {:else}
