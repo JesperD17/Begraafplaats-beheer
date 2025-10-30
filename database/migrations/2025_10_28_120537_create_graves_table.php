@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('graves', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("cemetary_id");
-            $table->foreign("cemetary_id")->references("id")->on("cemetaries")->onDelete("cascade");
+            $table->unsignedBigInteger("cemetery_id");
             $table->string("latitude");
             $table->string("longitude");
             $table->string("image_url");
