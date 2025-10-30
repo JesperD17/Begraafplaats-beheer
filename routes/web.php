@@ -22,11 +22,10 @@ Route::get('/admin', [AdminController::class, 'index'])
 ->middleware([EnsureAdminRole::class])
 ->name('admin');
 
+
 Route::get('/import', function() {
     return Inertia::render('Import');
 })->middleware(['auth', 'verified'])->name('import');
-
-Route::get('/Begraafplaatshome', [App\Http\Controllers\homepage\BegraafplaatsController::class, 'index']);
 
 Route::post('/import', [ExcelController::class, 'import'])->name('import');
 
