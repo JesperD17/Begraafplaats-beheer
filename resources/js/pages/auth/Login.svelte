@@ -95,7 +95,7 @@
                 </div>
                 
                 
-                <Button type="submit" tabindex={4} disabled={$form.processing} class="full-width relative">
+                <Button type="submit" tabindex={4} disabled={$form.processing} class="full-width relative margin-btm">
                     {#if $form.processing}
                         <LoaderCircle class="spinner" />
                     {/if}
