@@ -12,4 +12,9 @@ class RightsHolders extends Model
     {
         return $this->hasMany(GraveAgreements::class, 'rights_holder_id');
     }
+
+    public function rightsHolderUsers()
+    {
+        return $this->hasMany(RightsHoldersUsers::class, 'rights_holder_id');
+    }
 }

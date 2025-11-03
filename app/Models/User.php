@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Roles::class);
     }
+
+    public function rightsHolderUsers() 
+    {
+        return $this->hasMany(RightsHoldersUsers::class, 'user_id');
+    }
 }
