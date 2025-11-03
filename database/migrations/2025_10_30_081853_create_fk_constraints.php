@@ -23,7 +23,7 @@ return new class extends Migration
         Schema::table('grave_of_deceased', function (Blueprint $table) {
             $table->foreign("deceased_id")->references("id")->on("deceased")->onDelete("cascade");
             $table->foreign("grave_id")->references("id")->on("graves")->onDelete("cascade");
-        }); 
+        });
     }
 
     /**
