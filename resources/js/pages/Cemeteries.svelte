@@ -7,7 +7,7 @@
     var location = "laden...";
     var cards = [];
 
-    async function fetchLocations() {
+    async function fetchCemeteries() {
         try {
             const response = await fetch(`/getCemeteries`, {
                 headers: {
@@ -23,10 +23,9 @@
         }
     }
 
-    const locationPromise = (async () => {
+    const cemeteriesPromise = (async () => {
         try {
-            await fetchLocations();
-            return "Nederland";
+            await fetchCemeteries();
         } catch (err) {
             throw err;
         }
@@ -38,26 +37,26 @@
 </svelte:head>
 
 <AppLayout>
-    {#await locationPromise}
+    {#await cemeteriesPromise}
         <div class="h1 bold">
             laden...
         </div>
-        <div>
+        <div class="section">
             begraafplaatsen laden...
         </div>
         <div class="overlay-w-h">
             <Loader class="icon spin" />
         </div>
-    {:then location}
+    {:then cemeteries}
         <div class="h1 bold">
-            Kies je locatie in {location}
+            Kies je gekoppelde begraafplaats
         </div>
         <div class="section">
-            {#if cards.length > 0 && location !== "laden..."}
+            {#if cards.length > 0 && cemeteries !== "laden..."}
             <div class="flex-m-gap wrap">
                     {#each cards as card}
                         <div class="col-flex card-loc border-radius justify-between border-primary">
-                            <img src="images/dummy.png" alt="dummy img" class="border-radius-t cover">
+                            <img src="/images/dummy.png" alt="dummy img" class="border-radius-t cover">
                             <div class="col-flex">
                                 <div class="padding-all col-flex">
                                     <div class="center-text bold line-clamp">{card.name}</div>
@@ -76,9 +75,8 @@
         </div>
     {:catch}
         <div class="h1 bold">
-            Locatie onbekend
+            Fout
         </div>
-
         <div class="section">
             Er is een fout opgetreden bij het ophalen van je locatie of begraafplaatsen.
         </div>
