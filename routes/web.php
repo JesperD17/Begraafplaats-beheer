@@ -26,6 +26,14 @@ Route::get('/admin', [AdminController::class, 'index'])
 ->middleware([EnsureAdminRole::class])
 ->name('admin');
 
+Route::get('/admin', [AdminController::class, 'index'])
+    ->middleware([EnsureAdminRole::class])
+    ->name('admin');
+    
+Route::fallback(function () {
+    abort(404);
+});
+
 
 Route::get('/import', function() {
     return Inertia::render('Import');
