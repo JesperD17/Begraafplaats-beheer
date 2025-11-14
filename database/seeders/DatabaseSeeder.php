@@ -24,36 +24,36 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Permissions
-        $read = Permissions::create(['name' => 'read']);
-        $write = Permissions::create(['name' => 'write']);
-        $admin = Permissions::create(['name' => 'admin']);
+        Permissions::create(['name' => 'read']);
+        Permissions::create(['name' => 'write']);
+        Permissions::create(['name' => 'admin']);
 
         // Roles (link to permissions)
-        Roles::create(['name' => 'user', 'permission_id' => $read->id]);
-        Roles::create(['name' => 'editor', 'permission_id' => $write->id]);
-        Roles::create(['name' => 'admin', 'permission_id' => $admin->id]);
+        Roles::create(['name' => 'user', 'permission_id']);
+        Roles::create(['name' => 'editor', 'permission_id']);
+        Roles::create(['name' => 'admin', 'permission_id']);
 
         // Municipalities
-        $zwolle = Municipalities::create(['name' => 'Zwolle']);
-        $kampen = Municipalities::create(['name' => 'Kampen']);
+        Municipalities::create(['name' => 'Zwolle']);
+        Municipalities::create(['name' => 'Kampen']);
 
         // Grave statuses
-        $available = GraveStatuses::create(['name' => 'available']);
-        $occupied = GraveStatuses::create(['name' => 'occupied']);
+        GraveStatuses::create(['name' => 'available']);
+        GraveStatuses::create(['name' => 'occupied']);
 
         // Cemeteries
-        $cem1 = Cemeteries::create([
+        Cemeteries::create([
             'name' => 'Hakkenberg Uitvaartzorg BV',
-            'municipality_id' => $zwolle->id,
+            'municipality_id' => 1,
             'city' => 'Zwolle',
             'address' => 'Straat 1',
             'zip_code' => '8000AA',
             'image_hash_url' => 'c1.jpg',
         ]);
 
-        $cem2 = Cemeteries::create([
+        Cemeteries::create([
             'name' => 'Begraafplaats Kranenburg',
-            'municipality_id' => $zwolle->id,
+            'municipality_id' => 1,
             'city' => 'Zwolle',
             'address' => 'Straat 2',
             'zip_code' => '8001BB',
@@ -86,20 +86,20 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Graves
-        $grave1 = Graves::create([
-            'cemetery_id' => $cem1->id,
+        Graves::create([
+            'cemetery_id' => 1,
             'latitude' => 52456800,
             'longitude' => 6058517,
             'image_hash_url' => 'g1.jpg',
             'grave_number' => 1,
-            'status_id' => $available->id,
+            'status_id' => 1,
             'description' => 'Front row grave',
             'start_date' => now()->toDateString(),
             'end_date' => now()->addYears(10)->toDateString(),
         ]);
 
         // Deceased and linking
-        $dec1 = Deceased::create([
+        Deceased::create([
             'first_name' => 'Jan',
             'infix' => 'de',
             'last_name' => 'Vries',
@@ -108,13 +108,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         GraveOfDeceased::create([
-            'deceased_id' => $dec1->id,
-            'grave_id' => $grave1->id,
+            'deceased_id' => 1,
+            'grave_id' => 1,
         ]);
 
         // Link a user to the grave
         GraveUsers::create([
-            'grave_id' => $grave1->id,
+            'grave_id' => 1,
             'user_id' => 1,
         ]);
     }
