@@ -6,7 +6,10 @@ use App\Models\Roles;
 use App\Models\User;
 use App\Models\Permissions;
 use App\Models\Cemeteries;
+use App\Models\GraveAgreements;
+use App\Models\Graves;
 use App\Models\RightsHolders;
+use App\Models\RightsHoldersUsers;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -139,8 +142,42 @@ class DatabaseSeeder extends Seeder
             'longitude' => '5.908569',
         ]);
 
+        // Graves
+        Graves::create([
+            'cemetery_id' => 1,
+            'latitude' => '52.456900',
+            'longitude' => '6.058600',
+            'image_url' => 'example.jpg',
+            'number' => 'A1',
+            'costs' => '5000',
+            'type' => 'grave',
+            'term' => '10 years',
+        ]);
+
+        Graves::create([
+            'cemetery_id' => 1,
+            'latitude' => '52.456850',
+            'longitude' => '6.058550',
+            'image_url' => 'example2.jpg',
+            'number' => 'A2',
+            'costs' => '6000',
+            'type' => 'grave',
+            'term' => '20 years',
+        ]);
+
+        Graves::create([
+            'cemetery_id' => 2,
+            'latitude' => '52.531300',
+            'longitude' => '6.129600',
+            'image_url' => 'example3.jpg',
+            'number' => 'B1',
+            'costs' => '5500',
+            'type' => 'grave',
+            'term' => '15 years',
+        ]);
+        
         // Rights Holders
-        RightsHolders::create([
+        RightsHolders::create([ 
             'first_name' => 'Jan',
             'infix' => 'de',
             'last_name' => 'Vries',
@@ -155,13 +192,34 @@ class DatabaseSeeder extends Seeder
             'address' => 'Kerklaan 5',
             'city' => 'Kampen',
         ]);
-
+        
         RightsHolders::create([
             'first_name' => 'Klaas',
             'infix' => '',
             'last_name' => 'Jansen',
             'address' => 'Schoolstraat 10',
             'city' => 'Zwolle',
+        ]);
+
+        // Agreements
+        GraveAgreements::create([
+            'grave_id' => 1,
+            'rights_holder_id' => 1,
+            'start_date' => '2020-01-01',
+            'end_date' => '2030-01-01',
+        ]);
+
+        GraveAgreements::create([
+            'grave_id' => 3,
+            'rights_holder_id' => 1,
+            'start_date' => '2021-01-01',
+            'end_date' => '2030-12-01',
+        ]);
+
+        // Link user to rights holder
+        RightsHoldersUsers::create([
+            'rights_holder_id' => 1,
+            'user_id' => 1,
         ]);
     }
 }
