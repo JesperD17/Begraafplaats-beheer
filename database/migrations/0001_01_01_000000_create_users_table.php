@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('infix')->nullable();
             $table->string('last_name');
-            $table->integer('phone_number')->nullable();
+            $table->unsignedInteger('phone_number')->nullable();
             $table->string('address')->nullable();
             $table->string('zip_code')->nullable();
-            $table->integer('role_id')->default(1);
+            $table->unsignedBigInteger('role_id')->default(1);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password_hash');

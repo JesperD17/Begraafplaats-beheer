@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cemeteries', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->integer('municipality_id');
+            $table->unsignedBigInteger('municipality_id');
             $table->string('city');
             $table->string('address')->unique();
             $table->string('zip_code')->unique();
